@@ -34,6 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity reg is
     Port ( 
         i_clk : in std_logic;
+        i_reset : in std_logic;
         i_data : in std_logic_vector (7 downto 0);
         o_data : out std_logic_vector (7 downto 0)
     );
@@ -43,5 +44,13 @@ architecture Behavioral of reg is
 
 begin
 
+load_num : process(i_clk, i_reset)
+begin
+    if i_reset = '1' then
+        o_data <= "0000000";
+    elsif rising_edge(i_clk) then
+        o_data <= i_data;
+    end if;
+end process load_num;
 
 end Behavioral;

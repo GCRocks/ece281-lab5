@@ -105,7 +105,7 @@ signal w_sign : std_logic;
 
 component sevenSegDecoder is
       port(
-         i_reset : in std_logic;
+         i_neg : in std_logic;
          i_D : in std_logic_vector (3 downto 0);
          o_S : out std_logic_vector (6 downto 0)
       ); 
@@ -114,6 +114,7 @@ end component sevenSegDecoder;
 component reg is
     Port ( 
         i_clk : in std_logic;
+        i_reset : in std_logic;
         i_data : in std_logic_vector (7 downto 0);
         o_data : out std_logic_vector (7 downto 0)
     );
@@ -136,7 +137,7 @@ begin
 
 sevenSegDecoder_inst: sevenSegDecoder
     port map(
-       i_reset => btnU,
+       i_neg => w_sign,
        i_D => TDM_num,
        o_S => seg
     );	
@@ -188,6 +189,7 @@ twoscomp_decimal_inst : twoscomp_decimal
 regA : reg
     port map(
         i_clk => w_cycle(0),
+        i_reset => btnU,
         i_data => sw (7 downto 0),
         o_data => w_A      
     );
@@ -195,6 +197,7 @@ regA : reg
 regB : reg
     port map(
         i_clk => w_cycle(1),
+        i_reset => btnU,
         i_data => sw (7 downto 0),
         o_data => w_B      
     );

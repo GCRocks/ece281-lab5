@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity sevenSegDecoder is
       port(
-         i_reset : in std_logic;
+         i_neg : in std_logic;
          i_D : in std_logic_vector (3 downto 0);
          o_S : out std_logic_vector (6 downto 0)
       ); 
@@ -42,10 +42,6 @@ architecture Behavioral of sevenSegDecoder is
     
 begin
 
-    if i_reset = '1' then
-        o_S = "1111111";
-    end if;
-	
     c_Sa <= '1' when (  (i_D = x"1") or
                         (i_D = x"4"))
                         else '0';
@@ -78,7 +74,8 @@ begin
                         
     c_Sg <= '1' when (  (i_D = x"0") or
                         (i_D = x"1") or
-                        (i_D = x"7"))
+                        (i_D = x"7") or
+                        (i_neg = '1'))
                         else '0';
                 
     o_S(0) <= c_Sa;
