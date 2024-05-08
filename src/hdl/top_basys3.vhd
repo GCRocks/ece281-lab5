@@ -48,7 +48,7 @@ component TDM4 is
 	generic ( constant k_WIDTH : natural  := 4); -- bits in input and output
     Port ( i_clk        : in  STD_LOGIC;
            i_reset        : in  STD_LOGIC; -- asynchronous
-           i_sign         : in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
+           i_sign         : in  STD_LOGIC;
            i_hund         : in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
            i_tens         : in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
            i_ones         : in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
@@ -77,7 +77,6 @@ component ALU is
 );
 end component ALU;
 signal w_result : std_logic_vector (7 downto 0);
-signal w_num : std_logic_vector (7 downto 0);
 
 component clk_div is
 	generic ( constant k_DIV : natural := 2	); -- How many clk cycles until slow clock toggles
@@ -131,7 +130,18 @@ component clock_divider is
 	);
 end component clock_divider;
 signal w_clk : std_logic;
-  
+
+component mux4_1 is
+    port ( 
+        i_D0 : in std_logic_vector (3 downto 0);
+        i_D1 : in std_logic_vector (7 downto 0);
+        i_D2 : in std_logic_vector (7 downto 0);
+        i_D3 : in std_logic_vector (7 downto 0);
+        f : out std_logic_vector (7 downto 0)
+    );
+end component mux4_1;
+signal w_num : std_logic_vector (7 downto 0);
+
 begin
 	-- PORT MAPS ----------------------------------------
 
@@ -201,11 +211,19 @@ regB : reg
         i_data => sw (7 downto 0),
         o_data => w_B      
     );
+    
+mux_inst : mux4_1
+    port map(
+        i_D0 => w_cycle,
+        i_D1 => w_A,
+        i_D2 => w_B,
+        i_D3 => w_result,
+        f => w_num
+    );
 	
 	
 	-- CONCURRENT STATEMENTS ----------------------------
 
-led(12 downto 4) <= "000000000";	
-	
+led(12 downto 4) <= "000000000";		
 	
 end top_basys3_arch;

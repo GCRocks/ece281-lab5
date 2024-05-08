@@ -57,7 +57,7 @@ entity TDM4 is
 	generic ( constant k_WIDTH : natural  := 4); -- bits in input and output
     Port ( i_clk		: in  STD_LOGIC;
            i_reset		: in  STD_LOGIC; -- asynchronous
-           i_sign 		: in  STD_LOGIC_VECTOR (k_WIDTH -1 downto 0);
+           i_sign 		: in  STD_LOGIC;
 		   i_hund 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
 		   i_tens 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
 		   i_ones 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
@@ -91,8 +91,10 @@ begin
 	-- CONCURRENT STATEMENTS ----------------------------
 	
 	-- output MUXs
-	o_DATA <= i_sign when f_sel = "11" else
-			  i_hund when f_sel = "10" else
+
+	o_DATA <= "1111" when i_sign = '1' and f_sel = "11" else
+	          "0000" when i_sign = '0' and f_sel = "11" else
+	          i_hund when f_sel = "10" else
 			  i_tens when f_sel = "01" else
 			  i_ones;
 			  
