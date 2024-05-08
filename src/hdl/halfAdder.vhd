@@ -54,8 +54,8 @@ library ieee;
 -- entity name should match filename  
 entity halfAdder is 
   port(
-	i_A     : in  std_logic; -- 1-bit input port
-	i_B     : in  std_logic;
+	i_A     : in  std_ulogic_vector (7 downto 0); -- 1-bit input port
+	i_B     : in  std_ulogic_vector (7 downto 0);
 	o_Cout  : out std_logic;  
 	o_S     : out std_logic  -- 1-bit output port
 							 -- (NOTE: NO semicolon on LAST port only!)
