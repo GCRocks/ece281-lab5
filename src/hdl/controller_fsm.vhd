@@ -92,7 +92,8 @@ architecture Behavioral of controller_fsm is
 
 begin
 
-	-- CONCURRENT STATEMENTS ------------------------------------------------------------------------------
+	-- CONCURRENT STATEMENTS ------------------------------------------------------------------------------ 
+	
 	-- Next State Logic
     f_Q_next(1) <= f_Q(0);
     f_Q_next(2) <= f_Q(1);

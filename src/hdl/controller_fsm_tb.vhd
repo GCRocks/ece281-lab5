@@ -21,6 +21,8 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -60,31 +62,30 @@ controller_fsm_inst : controller_fsm
         i_adv => btnC,
         o_cycle => w_cycle,
         led => LEDs         
-     );
-     
-     
+     ); 
+
 	test_process : process 
     begin
     
-        btnU <= '1'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0001" report "error on reset" severity failure;
-        btnC <= '0'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0001" report "error staying at x1" severity failure;
-        btnC <= '1'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0010" report "error going to x2" severity failure; 
-        btnC <= '0'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0010" report "error staying at x2" severity failure;
-        btnC <= '1'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0100" report "error going to x3" severity failure; 
-        btnC <= '0'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0100" report "error staying at x3" severity failure;
-        btnC <= '1'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "1000" report "error going to x4" severity failure; 
-        btnC <= '0'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "1000" report "error staying at x4" severity failure;
-        btnC <= '1'; wait for 10 ns;
-            assert (w_cycle and LEDs) = "0001" report "error going to x1" severity failure; 
-
+    btnU <= '1'; btnC <= '0'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0001" report "error on reset" severity failure;
+    btnU <= '0'; btnC <= '0'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0001" report "error staying at x1" severity failure;
+    btnU <= '0'; btnC <= '1'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0010" report "error going to x2" severity failure; 
+    btnU <= '0'; btnC <= '0'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0010" report "error staying at x2" severity failure;
+    btnU <= '0'; btnC <= '1'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0100" report "error going to x3" severity failure; 
+    btnU <= '0'; btnC <= '0'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0100" report "error staying at x3" severity failure;
+    btnU <= '0'; btnC <= '1'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "1000" report "error going to x4" severity failure; 
+    btnU <= '0'; btnC <= '0'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "1000" report "error staying at x4" severity failure;
+    btnU <= '0'; btnC <= '1'; wait for 10 ns;
+        assert (w_cycle and LEDs) = "0001" report "error going to x1" severity failure;
+--            
             wait;
     end process;
         
