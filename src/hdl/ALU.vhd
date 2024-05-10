@@ -59,7 +59,7 @@ begin
 	
 	-- CONCURRENT STATEMENTS ----------------------------
 	
-    o_result <= std_logic_vector(unsigned(i_A) + unsigned(i_B)) when (i_op = x"0"); --add when i_op is 0
+    o_result <= std_logic_vector(unsigned(i_A) + unsigned(i_B)) when (i_op = "000"); --add when i_op is 0
     o_result <= std_logic_vector(unsigned(i_A) - unsigned(i_B)) when (i_op = x"1"); --subtract when i_op is 1
     o_result <= i_A and i_B when (i_op = x"2"); --AND when i_op is 2
     o_result <= i_A or i_B when (i_op = x"3"); --OR when i_op is 3
