@@ -133,7 +133,7 @@ signal w_clk : std_logic;
 
 component mux4_1 is
     port ( 
-        i_D0 : in std_logic_vector (3 downto 0);
+        sel : in std_logic_vector (3 downto 0);
         i_D1 : in std_logic_vector (7 downto 0);
         i_D2 : in std_logic_vector (7 downto 0);
         i_D3 : in std_logic_vector (7 downto 0);
@@ -214,7 +214,7 @@ regB : reg
     
 mux_inst : mux4_1
     port map(
-        i_D0 => w_cycle,
+        sel => w_cycle,
         i_D1 => w_A,
         i_D2 => w_B,
         i_D3 => w_result,

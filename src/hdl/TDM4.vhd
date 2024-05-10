@@ -103,5 +103,6 @@ begin
 			   "1101" when f_sel = "01" else
 			   "1110";
 		
+		
 end behavioral;
 

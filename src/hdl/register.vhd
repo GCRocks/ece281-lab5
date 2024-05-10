@@ -47,7 +47,7 @@ begin
 load_num : process(i_clk, i_reset)
 begin
     if i_reset = '1' then
-        o_data <= "0000000";
+        o_data <= "00000000";
     elsif rising_edge(i_clk) then
         o_data <= i_data;
     end if;
