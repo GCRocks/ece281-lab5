@@ -47,13 +47,13 @@ end ALU;
 architecture behavioral of ALU is 
   
 	-- declare components and signals
-signal temp_result, temp_A, temp_B : std_logic_vector (8 downto 0);
+signal temp_result, temp_A, temp_B: std_logic_vector (8 downto 0);
   
 begin
 	-- PORT MAPS ----------------------------------------
-      
-    temp_A <= i_A;
-    temp_B <= i_B;        
+
+    temp_A <= (8 downto 7 => '0') and i_A;
+    temp_B <= (8 downto 7 => '0') and i_B;        
 	
 	
 	-- CONCURRENT STATEMENTS ----------------------------
